@@ -1,7 +1,7 @@
 :root {
     --blue: #1e90ff;
     --white: #ffffff;
-    --dics-size: 70px;
+    --disc-size: 70px;
     --game-height: 800px;
 }
 
@@ -17,25 +17,14 @@
     align-items: center;
 }
 
-#floatingDisc {
-    position: absolute;
-    bottom: 0;
-    width: var(--dics-size);
-    height: var(--dics-size);
-    border-radius: 50%;
-    background-color: var(--blue);
-    /*animation: float 10s linear infinite;*/
-    /*top: calc(var(--game-height)/2 - var(--dics-size)/2);*/
-    top:50%;
-    z-index: 2;
-}
+
 
 #middleLine {
     position: absolute;
     width: 100%;
     height: 50px;
     background-color: rgba(107, 104, 104, 0.58);
-    top: calc(var(--game-height) / 2 - 25px);
+    top: calc(var(--game-height) / 5 - 25px);
 }
 
 #middleLine2 {
@@ -43,12 +32,29 @@
     width: 100%;
     height: 6px;
     background-color: rgba(30, 30, 30, 0.58);
-    top: calc(var(--game-height) / 2 - 3px);
+    top: calc(var(--game-height) / 5 - 3px);
     z-index: 3;
 }
+#floatingDisc {
+    position: absolute;
+    bottom: 0;
+    width: var(--disc-size);
+    height: var(--disc-size);
+    border-radius: 50%;
+    background-color: var(--blue);
+    animation: floatToTop 1.11s linear infinite;
+    /*top: calc(var(--game-height)/2 - var(--dics-size)/2);*/
+    /*top:40%;*/
+    z-index: 2;
+}
 
-@keyframes float {
-    0% { bottom: 0; }
-    50% { bottom: calc(100% - var(--dics-size)); }
-    100% { bottom: 0; }
+@keyframes floatToTop {
+    0% {
+        bottom: 0;
+        opacity: 1; /* Ensure the disc is visible at the start */
+    }
+    100% {
+        bottom: calc(100% - var(--disc-size)); /* Move to the top */
+        opacity: 1;
+    }
 }

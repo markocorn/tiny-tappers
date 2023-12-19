@@ -3,18 +3,42 @@ const buttonStates = {
     left: false,
     right: false
 };
-// Current distance from the center of the disc to the center of the line
-let distance = 0;
+// Position of disc
+let discPosition = 0;
+let discPositionOld = 0;
 
-// Direction of the disc movement
-let position = "";
+//Moving direction
+let movingDirection = "up";
+
+// Error objects
+let errors = [];
 
 // Function to check if both buttons are pressed
 function checkBothButtonsPressed() {
     if (buttonStates.left && buttonStates.right) {
         console.log('Both buttons pressed together!');
-        console.log('position: ', position);
-        console.log('distance: ', distance);
+        //Calculate distance between disc and line
+        const disc = document.getElementById('floatingDisc');
+        const line = document.getElementById('middleLine');
+
+        const discRect = disc.getBoundingClientRect();
+        const lineRect = line.getBoundingClientRect();
+
+        let discPosition = discRect.bottom + discRect.height / 2 -10;
+        let linePosition = lineRect.bottom + lineRect.height / 2 +10;
+
+        let distance = Math.abs(discPosition - linePosition);
+        if (movingDirection === "up") {
+            if (discPosition>linePosition) {
+                distance=distance*(-1);
+            }
+        }else{
+            if (discPosition<linePosition) {
+                distance=distance*(-1);
+            }
+        }
+        errors.push(distance);
+        console.log("errors", errors);
     }
 }
 
@@ -74,24 +98,18 @@ document.getElementById('rightButton').addEventListener('click', function () {
 // Function to calculate the distance between the disc and the line
 setInterval(() => {
     const disc = document.getElementById('floatingDisc');
-    const line = document.getElementById('middleLine');
+    //const line = document.getElementById('middleLine');
 
     const discRect = disc.getBoundingClientRect();
-    const lineRect = line.getBoundingClientRect();
+    //const lineRect = line.getBoundingClientRect();
 
-    let discCenter = discRect.bottom + discRect.height / 2;
-    let lineCenter = lineRect.bottom + lineRect.height / 2;
+    discPositionOld = discPosition;
+    discPosition = discRect.bottom + discRect.height / 2 -10;
 
-    // Calculate position of disc relative to line above line , below line or middle
-    if (discCenter < lineCenter) {
-        position = "above";
-    } else if (discCenter > lineCenter) {
-        position = "below";
-    } else {
-        position = "middle";
+    if (discPosition > discPositionOld) {
+        movingDirection = "down";
     }
-
-    // Calculate the vertical distance from the bottom of the disc to the line
-    distance = Math.abs(discCenter - lineCenter);
-
+    else {
+        movingDirection = "up";
+    }
 }, 10)
