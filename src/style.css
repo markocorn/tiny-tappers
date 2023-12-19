@@ -43,7 +43,7 @@
     border-radius: 50%;
     background-color: var(--blue);
     animation: floatToTop 1.11s linear infinite;
-    /*top: calc(var(--game-height)/2 - var(--dics-size)/2);*/
+    /*top: calc(var(--game-height)/5 - var(--disc-size)/2);*/
     /*top:40%;*/
     z-index: 2;
 }
