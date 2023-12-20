@@ -4,6 +4,7 @@
     <title>Tiny Tappers</title>
     <link rel="stylesheet" href="src/style.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -27,7 +28,69 @@
         <!-- First Column in First Row -->
         <div class="col-md-4">
             <!-- Content for the first column -->
-            <p>First Column Content</p>
+            <div class="p-2">
+                <button id="soundToggleButton" class="btn btn-dark">
+                    <i id="soundIcon" class="fas fa-volume-mute fa-2x"></i> <!-- Larger icon -->
+                </button>
+            </div>
+            <div class="input-group mb-3 p-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Metronome Speed</span>
+                </div>
+                <input type="number" class="form-control" placeholder="Speed" aria-label="Speed"
+                       aria-describedby="basic-addon2" id="metronomeSpeedInput" value="54">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">bpm</span>
+                </div>
+            </div>
+            <div class="p-2">
+                <div class="card">
+                    <div class="card-header">
+                        Results
+                    </div>
+                    <div class="card-body">
+                        <!-- Last Error -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Last Error (ms)</span>
+                            </div>
+                            <input type="text" class="form-control" id="lastError" readonly>
+                        </div>
+
+                        <!-- Average Error -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Average Error (ms)</span>
+                            </div>
+                            <input type="text" class="form-control" id="averageError" readonly>
+                        </div>
+
+                        <!-- Number of Claps -->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Claps Count</span>
+                            </div>
+                            <input type="text" class="form-control" id="numberOfClaps" readonly>
+                        </div>
+
+                        <div class="table-responsive" id="tableContainer">
+                            <table class="table table-sm table-striped table-hover">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Error (ms)</th>
+                                </tr>
+                                </thead>
+                                <tbody id="errorList">
+                                <!-- JavaScript will populate this -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
         <!-- Second Column in First Row -->
